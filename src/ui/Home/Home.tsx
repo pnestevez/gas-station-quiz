@@ -1,6 +1,11 @@
-export type HomeProps = {};
+export type HomeProps = {
+  findStartingGasStation: (
+    fuelDispenser: number[],
+    fuelCost: number[]
+  ) => number;
+};
 
-const Home = ({}: HomeProps): JSX.Element => {
+const Home = ({ findStartingGasStation }: HomeProps): JSX.Element => {
   return <div></div>;
 };
 
