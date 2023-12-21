@@ -8,7 +8,7 @@ const HomeContainer = (): JSX.Element => {
     let startingIndex = 0;
     let fuelTank = 0;
 
-    const tankBalance = fuelDispenser.reduce((fuelTank, fuel, i) => {
+    const tankBalance = fuelDispenser.reduce((balance, fuel, i) => {
       const dif = fuel - fuelCost[i];
       fuelTank += dif;
 
@@ -17,13 +17,18 @@ const HomeContainer = (): JSX.Element => {
         fuelTank = 0;
       }
 
-      return fuelTank;
+      return balance + dif;
     }, fuelTank);
 
     return tankBalance < 0 ? -1 : startingIndex;
   };
 
-  return <Home {...{ findStartingGasStation }} />;
+  const validateFields = (
+    fuelDispenser: number[],
+    fuelCost: number[]
+  ): boolean => fuelDispenser.length === fuelCost.length;
+
+  return <Home {...{ findStartingGasStation, validateFields }} />;
 };
 
 export default HomeContainer;
